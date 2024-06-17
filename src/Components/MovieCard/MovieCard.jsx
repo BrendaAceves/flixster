@@ -1,5 +1,7 @@
+// eslint-disable-next-line no-unused-vars
 import React from 'react';
 import './MovieCard.css'
+import PropTypes from 'prop-types';
 
 /*
 Display:
@@ -9,14 +11,17 @@ Display:
 
 
 */
-const MovieCard = () => {
+const MovieCard = ({movie}) => {
     return (
         <div className="card">
-            <h1>The movies title</h1>
-            <p>The poster image</p>
-            <p>The movies vote average or rating</p>
+        <h2>{movie.title}</h2>
+        <img src={`https://image.tmdb.org/t/p/original${movie["poster_path"]}`} alt={`${movie.title}`} />
+        <p>{movie.vote_average}</p>
         </div>
     );
 };
 
+MovieCard.propTypes = {
+    movie: PropTypes.object
+}
 export default MovieCard;
