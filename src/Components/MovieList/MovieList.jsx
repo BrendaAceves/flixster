@@ -6,6 +6,7 @@ const MovieList = () => {
     const [movies, setMovies] = useState([]);
     const [page, setPage] = useState(1); // State to keep track of the current page
     const [searchTerm, setSearchTerm] = useState("");
+    const [sortBy, setSortBy] = useState("popularity.desc"); // Default sorting by popularity
 
     const options = {
         method: 'GET',
@@ -15,9 +16,9 @@ const MovieList = () => {
         }
     };
 
-    const fetchMovies = async (pageNumber) => {
+    const fetchMovies = async (pageNumber, sortBy) => {
         try {
-            const response = await fetch(`https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=${pageNumber}&sort_by=popularity.desc`, options);
+            const response = await fetch(`https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=${pageNumber}&sort_by=${sortBy}`, options);
             if (!response.ok) {
                 throw new Error('Network response failure');
             }
@@ -31,28 +32,31 @@ const MovieList = () => {
 
     const loadMoreMovies = async () => {
         const nextPage = page + 1;
-        const newMovies = await fetchMovies(nextPage);
+        const newMovies = await fetchMovies(nextPage, sortBy);
         setMovies(prevMovies => [...prevMovies, ...newMovies]);
-        setPage(nextPage)
+        setPage(nextPage);
     };
 
     useEffect(() => {
-        fetchMovies(1).then(initialMovies => {
+        fetchMovies(1, sortBy).then(initialMovies => {
             setMovies(initialMovies);
         });
-    }, []);
+    }, [sortBy]); // Fetch movies whenever sortBy changes
 
     // Filter movies based on search term
     const filteredMovies = movies.filter((movie) =>
         movie.title.toLowerCase().includes(searchTerm.toLowerCase())
     );
-    console.log("Search Term:", searchTerm)
-
 
     const handleNowPlayingClick = () => {
         if (searchTerm !== "") {
             setSearchTerm("");
         }
+    };
+
+    const handleSortChange = (e) => {
+        setSortBy(e.target.value);
+        setPage(1); // Reset page number when changing sort criteria to fetch from the first page
     };
 
     return (
@@ -66,12 +70,19 @@ const MovieList = () => {
                     onChange={(e) => setSearchTerm(e.target.value)}
                     className="search-input"
                 />
-                <button onClick={(e) => setSearchTerm(e.target.value)}>Search</button>
+                <select value={sortBy} onChange={handleSortChange}>
+                    <option value="popularity.desc">Popularity Descending</option>
+                    <option value="vote_average.desc">Rating Descending</option>
+                    <option value="vote_count.desc">Vote Count Descending</option>
+                </select>
             </div>
             <div className="movie-list">
                 {/* Render your movies here */}
                 {filteredMovies.map(movie => (
-                    <MovieCard key={movie.id} movie={movie} />
+                    <MovieCard 
+                        key={movie.id} 
+                        movie={movie} 
+                    />
                 ))}
             </div>
             <button onClick={loadMoreMovies}>Load More</button>
