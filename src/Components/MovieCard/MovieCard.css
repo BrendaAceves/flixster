@@ -52,3 +52,7 @@ h1 {
     z-index: 1; /* Ensure text is above the background image */
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Optional: Add text shadow for better visibility */
 }
+
+.movieDescription {
+    height: 200px;
+}

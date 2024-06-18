@@ -55,7 +55,6 @@ h2 {
 
 p {
     overflow: scroll;
-    height: 50px;
 }
 
 @media screen and (max-height: 840px) {
@@ -71,5 +70,4 @@ p {
         width: 200px !important;
         height: 200px !important;
     }
-
 }
