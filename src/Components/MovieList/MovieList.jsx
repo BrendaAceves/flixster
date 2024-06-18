@@ -1,13 +1,13 @@
-/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import MovieCard from '../MovieCard/MovieCard';
 import './MovieList.css';
 
 const MovieList = () => {
     const [movies, setMovies] = useState([]);
-    const [page, setPage] = useState(1); // State to keep track of the current page
+    const [genres, setGenres] = useState([]);
+    const [page, setPage] = useState(1);
     const [searchTerm, setSearchTerm] = useState("");
-    const [sortBy, setSortBy] = useState("popularity.desc"); // Default sorting by popularity
+    const [sortBy, setSortBy] = useState("popularity.desc");
 
     const options = {
         method: 'GET',
@@ -16,6 +16,15 @@ const MovieList = () => {
             Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhNWIzMzIwYTNlMjdiNWZmOGI2OTUwYTY0M2E2MzczNiIsInN1YiI6IjY2NmM4ZTc1NzY2ZTI5MWQ3OTJkMDgzYSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.eDu2lcCB2dr9IIy8ft1DIUD0rfNkHayt6wvZdwmWuVM'
         }
     };
+
+    useEffect(() => {
+        // Fetch genre list
+        fetch('https://api.themoviedb.org/3/genre/movie/list?language=en', options)
+            .then(response => response.json())
+            .then(data => setGenres(data.genres))
+            .catch(error => console.error('Error fetching genres:', error));
+    }, []); // Empty dependency array ensures it runs only once after initial render
+
     // Fetching Movie List
     const fetchMovies = async (pageNumber, sortBy) => {
         try {
@@ -81,14 +90,15 @@ const MovieList = () => {
             <div className="movie-list">
                 {/* Render your movies here */}
                 {filteredMovies.map(movie => (
-                    <MovieCard 
-                        key={movie.id} 
-                        movie={movie} 
+                    <MovieCard
+                        key={movie.id}
+                        movie={movie}
+                        genres={genres.filter(genre => movie.genre_ids.includes(genre.id))}
                     />
                 ))}
             </div>
             <div className="loadMore">
-            <button onClick={loadMoreMovies}>Load More</button>
+                <button onClick={loadMoreMovies}>Load More</button>
             </div>
         </>
     );
