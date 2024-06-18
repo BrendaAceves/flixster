@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import MovieCard from '../MovieCard/MovieCard';
 import './MovieList.css';
@@ -15,7 +16,7 @@ const MovieList = () => {
             Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhNWIzMzIwYTNlMjdiNWZmOGI2OTUwYTY0M2E2MzczNiIsInN1YiI6IjY2NmM4ZTc1NzY2ZTI5MWQ3OTJkMDgzYSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.eDu2lcCB2dr9IIy8ft1DIUD0rfNkHayt6wvZdwmWuVM'
         }
     };
-
+    // Fetching Movie List
     const fetchMovies = async (pageNumber, sortBy) => {
         try {
             const response = await fetch(`https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=${pageNumber}&sort_by=${sortBy}`, options);
@@ -61,8 +62,8 @@ const MovieList = () => {
 
     return (
         <>
-            <div className="search-container">
-                <button className="default" onClick={handleNowPlayingClick}>Now Playing</button>
+            <div className="searchContainer">
+                <button onClick={handleNowPlayingClick}>Now Playing</button>
                 <input
                     type="text"
                     placeholder="Search Movies..."
@@ -70,6 +71,7 @@ const MovieList = () => {
                     onChange={(e) => setSearchTerm(e.target.value)}
                     className="search-input"
                 />
+
                 <select value={sortBy} onChange={handleSortChange}>
                     <option value="popularity.desc">Popularity Descending</option>
                     <option value="vote_average.desc">Rating Descending</option>
@@ -85,7 +87,9 @@ const MovieList = () => {
                     />
                 ))}
             </div>
+            <div className="loadMore">
             <button onClick={loadMoreMovies}>Load More</button>
+            </div>
         </>
     );
 };

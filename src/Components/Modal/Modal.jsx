@@ -1,7 +1,8 @@
 import React from "react";
 import "./Modal.css";
 
-const Modal = ({ show, onClose, children }) => {
+const Modal = ({show, onClose, children }) => {
+    // Don't show modal if the user hasn't clicked on the movie
     if (!show) {
         return null;
     }

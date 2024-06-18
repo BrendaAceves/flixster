@@ -2,4 +2,52 @@
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
+    justify-content: center;
+    text-align: center;
+}
+
+.searchContainer {
+    display: flex;
+    padding: 2em;
+    justify-content: center;
+    gap: 30px;
+}
+
+input {
+    width: 40%;
+    padding: 1em;
+}
+
+.loadMore {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 50px auto;
+}
+
+.loadMore > button {
+    width: 200px;
+    padding: 1em;
+    background-color: black;
+    color: white;
+}
+
+@media screen and (max-width: 600px) {
+    .searchContainer {
+        flex-direction: column;
+        width: 300px;
+        padding: 1em 0px;
+        margin: auto;
+    }
+
+    /* .searchContainer {
+        width: 80%;
+    } */
+
+    input, button, select {
+        width: 85%;
+        margin: auto;
+        padding: 1em;
+    }
+    
 }

@@ -16,8 +16,8 @@
     padding: 20px;
     border-radius: 5px;
     position: relative;
-    max-width: 500px;
-    width: 90%;
+    width: 450px;
+    height: 90%;
 }
 
 .modal-header {
@@ -26,5 +26,50 @@
 }
 
 .modal-body {
-    margin-top: 20px;
+    overflow: scroll;
+}
+
+.modal-body > img {
+    height: 400px;
+    width: 350px !important;
+}
+
+h2 {
+    margin: 5px 0px;
+}
+
+@media screen and (max-width: 510px) {
+    .modal-content {
+        width: 300px;
+        padding: 10px;
+    }
+    .modal-body > img {
+        width: 290px !important;
+    }
+
+    h2 {
+        padding: 0.5em 0em;
+    }
+
+}
+
+p {
+    overflow: scroll;
+    height: 50px;
+}
+
+@media screen and (max-height: 840px) {
+    .modal-body > img {
+        width: 200px !important;
+        height: 300px !important;
+    }
+
+}
+
+@media screen and (max-height: 710px) {
+    .modal-body > img {
+        width: 200px !important;
+        height: 200px !important;
+    }
+
 }
