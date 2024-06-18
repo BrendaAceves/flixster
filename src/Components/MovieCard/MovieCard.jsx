@@ -21,9 +21,9 @@ const MovieCard = ({ movie, genres }) => {
             </div>
             <img src={`https://image.tmdb.org/t/p/original${movie.poster_path}`} alt={`${movie.title}`} />
             <p>{movie.vote_average}</p>
-            <p>Popularity: {movie.popularity}</p>
+            {/* <p>Popularity: {movie.popularity}</p>
             <p>Rating: {movie.vote_average}</p>
-            <p>Vote Count: {movie.vote_count}</p>
+            <p>Vote Count: {movie.vote_count}</p> */}
 
             {/* Modal Component */}
             <Modal show={showModal} onClose={closeModal}>
