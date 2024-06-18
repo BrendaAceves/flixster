@@ -16,8 +16,8 @@
     padding: 20px;
     border-radius: 5px;
     position: relative;
-    width: 450px;
-    height: 90%;
+    width: 500px;
+    height: fit-content;
 }
 
 .modal-header {
@@ -30,21 +30,22 @@
 }
 
 .modal-body > img {
-    height: 400px;
-    width: 350px !important;
+    height: 500px !important;
+    width: 400px !important;
 }
 
 h2 {
     margin: 5px 0px;
 }
 
-@media screen and (max-width: 510px) {
+@media screen and (max-width: 550px) {
     .modal-content {
         width: 300px;
         padding: 10px;
     }
     .modal-body > img {
         width: 290px !important;
+        height: 300px !important;
     }
 
     h2 {
