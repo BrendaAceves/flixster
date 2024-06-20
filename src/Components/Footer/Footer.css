@@ -14,3 +14,13 @@ a {
     margin: auto;
     font-size: 22px;
 }
+
+@media screen and (max-width: 550px) {
+    footer {
+        display: flex;
+        flex-direction: column;
+        height: fit-content;
+        gap: 30px;
+        padding: 15px 0px;
+    }
+}
